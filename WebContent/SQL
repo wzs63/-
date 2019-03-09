@@ -1,0 +1,40 @@
+create table ad #管理员表
+( aname varchar(20) not null primary key, #管理员名
+  ap    varchar(20) not null); #管理员密码
+  
+create table commodity #商品
+( cid 	 int(11) auto_increment primary key,#商品号
+  cname varchar(20) not null ,#商品名	主码
+  cs    integer     not null,#库存量
+  cp    integer     not null,#单价
+  uid 
+);  
+
+create table user #普通用户
+( uid varchar(20)  primary key, #学号 主码
+  uname varchar(20) not null,
+  up  varchar(20) not null, #用户密码
+  ub  float not null, #零钱
+  uage integer not null, #年龄
+  uar varchar(20), #地址
+  upn varchar(20) , #电话
+  cors int default 0 #0表示顾客，可以升级为1商家，此时要添加地址和电话
+  ); #电话
+
+create table purchase #购物表
+( pa    integer     not null, #购买数量
+  pd    date        not null, #购买日期
+  uid  varchar(20) not null, #用户号
+  cid  int(11) not null, #商品号
+  primary key(pd,cid,uid),
+  foreign key (cid) references commodity(cid),
+  foreign key (uid) references user(uid)
+  );
+create table vis #浏览表
+( visd  date       not null, #浏览日期
+  cid int(11) not null, #商品号
+  uid   varchar(20) not null, #用户名
+  primary key(visd,uid,cid),
+  foreign key (cid) references commodity(cid),
+  foreign key (uid) references user(uid)
+  );

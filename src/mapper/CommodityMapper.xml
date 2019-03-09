@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+	<mapper namespace="mapper.CommodityMapper">
+		<select id="selectAll" resultType="Commodity">
+			select * from commodity and cs != 0
+		</select>
+	    <insert id="add" parameterType="Commodity" >
+  		  insert into commodity(cname,cs,cp,uid,type) values (#{cname},#{cs},#{cp},#{uid},#{type})    
+		</insert>
+		<select id="selectByUid" parameterType="String" resultType="Commodity">
+			select * from commodity where uid = '${_parameter}' and cs != 0
+		</select>
+		<select id="selectByType" parameterType="_int" resultType="Commodity">
+			select * from commodity where type = ${_parameter} and cs != 0
+		</select>
+		<select id="selectByLikeCname" parameterType="map" resultType="Commodity">
+			select * from commodity where cname like '%${part}%' and cs != 0 order by cid asc limit ${first},6
+		</select>
+		<select id="selectByCid" parameterType="_int" resultType="Commodity">
+			select * from commodity where cid = ${_parameter} and cs != 0
+		</select>
+		<select id="selectByYeShu" parameterType="map" resultType="Commodity">
+			select * from commodity where cs != 0 and type = ${type} order by cid asc limit ${first},6
+		</select>
+		<delete id="delete" parameterType="_int">
+			delete from commodity where cid = ${_parameter}
+		</delete>
+		<update id="updateCs" parameterType="map">
+			update commodity set cs=#{cs}  where cid=#{cid}
+		</update>
+	</mapper>
+

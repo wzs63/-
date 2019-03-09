@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+	<mapper namespace="mapper.UserMapper">
+		<select id="selectByUid" parameterType="String" resultType="User">
+			select * from user where uid = #{_parameter}
+		</select>
+		<select id="select" resultType="User">
+			select * from user
+		</select>
+	    <delete id="delete" parameterType="String" >
+	         delete from   user  where uid=#{_parameter}
+	    </delete>	    
+	    <insert id="add" parameterType="User" >
+  		  insert into user(uid,up) values (#{uid},#{up})    
+		</insert>
+		<update id="updateUp" parameterType="map"><!-- map对应名字区分大小哦 -->
+  		  update user set up=#{up} where uid = #{uid}    
+		</update>
+		<select id="selectByUidAndUp" parameterType="User" resultType="User">
+			select * from user where uid = #{uid} and up = #{up}
+		</select>
+		<update id="updateByUidAndTximg" parameterType="User" >
+    		update user set tximg=#{tximg} where uid=#{uid}    
+		</update>
+		<update id="updateByUarAndUpn" parameterType="User" >
+    		update user set uar=#{uar} , upn=#{upn} , cors=1 where uid=#{uid}  
+		</update>
+		
+	</mapper>
+

@@ -1,0 +1,88 @@
+12.18
+getElementsByName("ap")返回可能是一个列表，要取第一个值
+
+<i> 标签显示斜体文本效果。
+
+
+“成为商家” 还是直接上传商品呢
+------------------
+未知标签<c:if>-> 解决方法：加<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+-----------------------
+req.getSession().setAttribute("tximg", tximg);
+mav.addObject("tximg", tximg);//这个一刷新就没得了哦，，
+----------------------------------------------------------------
+
+https://www.cnblogs.com/lzb1991/p/5800886.html
+jre源包 加JAR，要不String 都报错，，
+---------------------------------------------------------
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
+    xmlns:tx="http://www.springframework.org/schema/tx" xmlns:jdbc="http://www.springframework.org/schema/jdbc"
+    ... > 
+    两段要加空格！！！要不XmlBeanDefinitionStoreException
+ ------------------------------------------------------------------------   
+mybatis mapper.xml sql 
+当parameterType为String时
+任何参数都必须为_parameter
+两种方法
+{
+解决办法1
+在接口参数里加上mybatis中的@param注解
+@MyBatisDao
+public interface OfficeDao extends TreeDao<Office> {
+    List<Office> findCompanyNameList（@Param("name")String name);
+}
+<select id="findCompanyNameList" parameterType="java.lang.String" resultType="com.pds.modules.sys.entity.Office">
+    SELECT id,name FROM sys_office  where o.del_flag = '1'
+       <if test="name!= null and name!= ''">
+           AND name LIKE concat('%',#{name},'%')
+       </if>
+</select>
+}
+{
+解决办法2
+在xml的if里用”_parameter” 代表参数
+<select id="findCompanyNameList" parameterType="java.lang.String" resultType="com.pds.modules.sys.entity.Office">
+    SELECT id,name FROM sys_office  where o.del_flag = '1'
+       <if test="_parameter!= null and _parameter!= ''">
+           AND name LIKE concat('%',#{name},'%')
+       </if>
+</select>
+}
+------------------------------------------------------------
+关于控制器
+控制器Controller 负责处理由DispatcherServlet 分发的请求，它把用户请求的数据经过业务处理层处理之后封装成一个Model ，然后再把该Model 返回给对应的View 进行展示。
+此外，当需要从request 中绑定的参数和方法的参数名不相同的时候，也需要在@RequestParam 中明确指出是要绑定哪个参数。
+当然，如果表单name和方法参数是同名，会自动填充。
+另外
+我们在springMVC.xml中
+ < context:component-scan base-package = "controller" ></ context:component-scan > 
+告诉Spring 该到哪里去找标记为@Controller 的Controller 控制器。
+---------------------------------------------
+Service 层：相对具体的业务逻辑服务层。
+
+DAO(==Mapper)层：数据访问层，与底层 MySQL、Oracle、Hbase 进行数据交互。
+----------------------------
+12.2333//睡了一上午加一中午啊啊啊啊啊
+
+"c:forEach" (org.apache.taglibs.standard.tag.rt.core.ForEachTag) was not found on the Java  	 Build Path
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"  isELIgnored="false" %>
+    最后 %>前要加空格！！！
+---------------------------------------
+application.xml
+<property name="typeAliasesPackage" value="pojo"/> 
+使得mapper.xml可以用简单的别名(User)，而不 用写全名(pojo.User),哈哈哈哈
+--------------------------------------------------
+实现接口类要比接口方法更开放哦
+-------------------------------------
+在我们设置CSS的时候，对标签元素不设置边框属性或者取消边框属性一般设置为：border:none;或border:0;两种方法均可。
+【border:0;】把border设为“0”像素虽然在页面上看不见，但按border默认值理解，浏览器依然对border-width/border-color进行了渲染，即已经占用了内存值。
+【border:none;】把border设为“none”即没有，浏览器解析“none”时将不作出渲染动作，即不会消耗内存值。
+
+在i标签图标上面放个透明的submit，，border: 0 边框设为0像素 background-color:transparent;颜色随父节点 position: relative相对位移到图标上 opacity: 0 透明度为0 
+
+-----------------
+sql 在xml中写&&会报错啊啊 换成and
+-----------------
+对了，，这个项目得联网哦，用了很多网上的资源，，

@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+	<mapper namespace="mapper.PurchaseMapper">
+	    <select id="selectByUid" parameterType="String" resultType="Purchase">
+	         select * from   purchase  where uid = #{_parameter} 
+	    </select>	
+	    <select id = "selectByUidAndCid" parameterType="Purchase" resultType="Purchase">
+	  	  select * from   purchase  where uid = #{uid} and cid = #{cid} 
+	    </select>
+	    <update id="updatePsum" parameterType="Purchase">
+	    	update purchase set psum=#{psum}  where cid=#{cid} and uid = #{uid}
+	    </update>    
+	  
+		
+	    <insert id="add" parameterType="Purchase" >
+  		  insert into purchase values (#{psum},#{uid},#{cid},#{cname},#{jiage} )    
+		</insert>
+		 <delete id="delete" parameterType="Purchase" >
+  		  delete  from purchase where cid=#{cid} and uid = #{uid}
+		 </delete>
+		
+	</mapper>
+
