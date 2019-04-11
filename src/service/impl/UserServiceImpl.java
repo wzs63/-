@@ -1,8 +1,11 @@
 package service.impl;
 
+import java.math.BigInteger;
+import java.security.SecureRandom;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Random;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -17,6 +20,9 @@ public class UserServiceImpl implements UserService{
 	UserMapper userMapper;
 	@Override
 	public void add(User user) {
+		Random random = new SecureRandom();
+		System.out.println();
+		String salt=new BigInteger(130, random).toString(32);
 		userMapper.add(user);
 	}
 
@@ -64,6 +70,12 @@ public class UserServiceImpl implements UserService{
 	public List<User> select() {
 		
 		return userMapper.select();
+	}
+
+	@Override
+	public String getSaltByUid(String uid) {
+		
+		return userMapper.selectSaltByUid(uid);
 	}
 
 

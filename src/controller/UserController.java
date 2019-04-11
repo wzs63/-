@@ -2,8 +2,13 @@ package controller;
 
 import java.io.File;
 import java.io.IOException;
+import java.math.BigInteger;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+import java.security.SecureRandom;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Random;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -40,24 +45,36 @@ public class UserController {
 		return mav;
 	}
 	@RequestMapping("loginwc.do")
-	public ModelAndView loginwc(User user,HttpServletRequest req,HttpServletResponse resp) {
+	public ModelAndView loginwc(User user,HttpServletRequest req,HttpServletResponse resp) throws NoSuchAlgorithmException {
 		ModelAndView mav = new ModelAndView();
 		System.out.println(user.getUid());
-		System.out.println(user.getUp());
+		System.out.println();
+		System.out.println(user.getSalt());
+		String salt = userService.getSaltByUid(user.getUid());
+		MessageDigest md = MessageDigest.getInstance("MD5");
+        // 计算md5函数
+        md.update((user.getUp()+salt).getBytes());
+        user.setUp(new BigInteger(1, md.digest()).toString(16));
+        
+        //登陆成功
 		if(userService.isCanLogin(user)) {
+			//放入会话uid
 			req.getSession().setAttribute("uid", user.getUid());
+			//放入会话用户头像地址
 			String tximg = userService.selectByUid(user.getUid()).getTximg();
 			req.getSession().setAttribute("tximg", tximg);
 			System.out.println(tximg);
+			//判断用户是否已注册为商人
 			if(userService.isStore(user)) {
 				req.getSession().setAttribute("isStore", 1);
 			}else {
 				req.getSession().setAttribute("isStore", 0);
 			}
-			req.getSession().setAttribute("tximg", "mrtx.png");
 			mav.setViewName("welcome");
 			
-		}else {
+		}
+		//登录失败
+		else {
 			mav.addObject("islogincg", 0);
 			System.out.println("登录失败");
 			mav.setViewName("login");
@@ -71,11 +88,23 @@ public class UserController {
 		return mav;
 	}
 	@RequestMapping("registerwc.do")
-	public ModelAndView registerwc(User user,HttpServletRequest res,HttpServletResponse resp){
+	public ModelAndView registerwc(User user,HttpServletRequest res,HttpServletResponse resp) throws NoSuchAlgorithmException{
 		//user自动填写了已经
 		ModelAndView mav = new ModelAndView();
 		System.out.println(user.getUid());
 		System.out.println(user.getUp());
+		//随机生成盐
+		Random random = new SecureRandom();
+		String salt = new BigInteger(130, random).toString(32);
+		 // 生成一个MD5加密计算摘要
+        MessageDigest md = MessageDigest.getInstance("MD5");
+        // 计算md5函数
+        md.update((user.getUp()+salt).getBytes());
+        // digest()最后确定返回md5 hash值，返回值为8位字符串。因为md5 hash值是16位的hex值，实际上就是8位的字符
+        // BigInteger函数则将8位的字符串转换成16位hex值，用字符串来表示；得到字符串形式的hash值
+        //一个byte是八位二进制，也就是2位十六进制字符（2的8次方等于16的2次方）
+        user.setUp(new BigInteger(1, md.digest()).toString(16));
+		user.setSalt(salt);
 		userService.add(user);
 		mav.setViewName("login");
 		return mav;

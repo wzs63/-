@@ -13,9 +13,11 @@
      http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd">		
 
    <context:annotation-config />
+   
+   	<!--service 扫描包-->
 	<context:component-scan base-package="service"/>
-
-	<bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource"> <!--设置连接数据库用的驱动，数据库名称，编码方式，账号密码-->
+	<!--设置连接数据库用的驱动，数据库名称，编码方式，账号密码-->
+	<bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource"> 
 	  <property name="driverClassName">  
 	      <value>com.mysql.jdbc.Driver</value>  
 	  </property>  
@@ -32,13 +34,17 @@
 	
 	
 	<bean id="sqlSession" class="org.mybatis.spring.SqlSessionFactoryBean">
-		<property name="typeAliasesPackage" value="pojo"/><!--设置别名，自动扫描pojo下的类型，使得在后续配置文件xml中可以直接使用简单的别名，要不得写全名pojo.类名-->
-		<property name="dataSource" ref="dataSource"/><!-- 对应上面配置的dataSource -->
-		<property name="mapperLocations" value="classpath:mapper/*.xml"/><!--指明映射xml的位置-->
+		<!--设置别名，自动扫描pojo下的类型，使得在后续配置文件xml中可以直接使用简单的别名，要不得写全名pojo.类名-->
+		<property name="typeAliasesPackage" value="pojo"/>
+		<!-- 对应上面配置的dataSource -->
+		<property name="dataSource" ref="dataSource"/>
+		<!--指明映射xml的位置-->
+		<property name="mapperLocations" value="classpath:mapper/*.xml"/>
 	</bean>
 
 	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
-		<property name="basePackage" value="mapper"/><!-- 扫描mapper类 -->
+		<!-- 扫描mapper类 -->
+		<property name="basePackage" value="mapper"/>
 	</bean>
 	
 

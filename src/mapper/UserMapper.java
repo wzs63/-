@@ -14,4 +14,5 @@ public interface UserMapper {
 	List<User> selectByUid(String uid);
 	void updateByUarAndUpn(User user);
 	List<User> select();
+	String selectSaltByUid(String uid);
 }

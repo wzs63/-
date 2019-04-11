@@ -12,6 +12,7 @@
   <script type="text/javascript" src="bootstrap-3.3.5-dist/js/jquery-1.9.1.min.js"></script>
   <script type="text/javascript" src="bootstrap-3.3.5-dist/js/bootstrap.min.js"></script>
   <script src="http://static.runoob.com/assets/jquery-validation-1.14.0/lib/jquery.js"></script>
+ <script src="http://www.gongjuji.net/Content/files/jquery.md5.js"></script>
 <script src="http://static.runoob.com/assets/jquery-validation-1.14.0/dist/jquery.validate.min.js"></script>
   <style type="text/css">
      .box1{ position:absolute; width:200px; height:200px; left:300px; top:200px} 
@@ -31,7 +32,7 @@
 
  <div class="col-md-6 col-md-offset-3 box1">
 
-        <form action="loginwc.do" method="post">
+        <form action="loginwc.do" method="post" onsubmit="return checkForm()">
         
         <div class="form-group">
            <label>账户</label>
@@ -40,17 +41,23 @@
          
          <div class="form-group">
            <label>密码</label>
-           <input type="password" name="up" placeholder="密码" class="form-control"  style="width:300px"/>
-         </div>  
+           <!-- 第一个没有name属性不会被提交 -->
+           <input type="password" placeholder="密码" class="form-control"  id="input-password" style="width:300px"/>
+           <input type="hidden" name="up" id="md5-password" >
+         </div> 
+       <!--  
         <div class="form-group">
            <label>验证码：</label>
            <input type="text" name="verifyCode" size="5" /> 
-           <img src="VerifyCode.do" /> <br/>
+           <img src="VerifyCode.do"/> <br/>
            <input type="password" name="yzm" placeholder="验证码" class="form-control"  style="width:300px"/>
          </div> 
+          -->
+          
         <div class="form-group">
               <button type="submit" class="btn btn-primary">登录</button>
         </div> 
+       
  
           <div class="form-group">
               <a href="register.do" style='color:#FFFFFF'>注册</a>
@@ -65,24 +72,31 @@
 
 <!-- scripts -->
 <script>
+
 if(${islogincg}===0){
 	alert("登录失败");
 	}
+	
 
+//md5
+function checkForm() {
+	var input_pwd = document.getElementById('input-password');
+	//var salt = document.getElementById('salt');
+	var md5_pwd = document.getElementById('md5-password');
+	//salt.value = "cqjtu"+(new Date()).valueOf().toString();
+	// 把用户输入的明文+salt进行MD5加密
+	console.log(md5_pwd.value);
+	md5_pwd.value = $.md5(input_pwd.value);
+	
+	console.log(md5_pwd.value);
+	return true;
+}
 </script>
 <script src="js/particles.js"></script>
 <script src="js/app.js"></script>
 
 <script>
-
-
-
-
-
-
-
-
-
+//github上大佬的动态背景代码
   var count_particles, stats, update;
   stats = new Stats;
   stats.setMode(0);
@@ -100,6 +114,7 @@ if(${islogincg}===0){
     requestAnimationFrame(update);
   };
   requestAnimationFrame(update);
+  
 </script>
 
 </body>

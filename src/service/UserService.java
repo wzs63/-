@@ -14,4 +14,5 @@ public interface UserService {
 	User selectByUid(String uid);
 	void updateByUarAndUpn(User user);
 	List<User> select();
+	String getSaltByUid(String uid);
 }

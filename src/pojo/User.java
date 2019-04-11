@@ -10,6 +10,13 @@ public class User {
 	String upn;
 	int cors;
 	String tximg;
+	String salt;
+	public String getSalt() {
+		return salt;
+	}
+	public void setSalt(String salt) {
+		this.salt = salt;
+	}
 	public String getTximg() {
 		return tximg;
 	}

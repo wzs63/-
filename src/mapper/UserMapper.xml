@@ -14,13 +14,16 @@
 	         delete from   user  where uid=#{_parameter}
 	    </delete>	    
 	    <insert id="add" parameterType="User" >
-  		  insert into user(uid,up) values (#{uid},#{up})    
+  		  insert into user(uid,up,salt) values (#{uid},#{up},#{salt})    
 		</insert>
 		<update id="updateUp" parameterType="map"><!-- map对应名字区分大小哦 -->
   		  update user set up=#{up} where uid = #{uid}    
 		</update>
 		<select id="selectByUidAndUp" parameterType="User" resultType="User">
 			select * from user where uid = #{uid} and up = #{up}
+		</select>
+		<select id="selectSaltByUid" parameterType="String" resultType="String">
+			select salt from user where uid = #{uid} 
 		</select>
 		<update id="updateByUidAndTximg" parameterType="User" >
     		update user set tximg=#{tximg} where uid=#{uid}    
