@@ -1,6 +1,2 @@
-/controller/
-/filter/
-/mapper/
-/pojo/
-/service/
-/util/
+/log4j/
+/log4j.properties
