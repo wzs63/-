@@ -30,14 +30,16 @@
          
          <div class="form-group">
            <label>密码</label>
-           <input type="text" id="input-password" placeholder="密码" class="form-control" style="width:300px"/>
-        </div>  
+           <input type="password" id="input-password" placeholder="密码" class="form-control" style="width:300px"/>
+       	 </div>  
         
         <div class="form-group">
            <label>确认密码</label>
-           <input type="text" id="input-password2" placeholder="确认密码" class="form-control" style="width:300px"/>
+           <input type="password" id="input-password2" placeholder="确认密码" class="form-control" style="width:300px"/>
         </div> 
-      <input type="hidden" id="md5-password" name="up">
+        
+      <input type="hidden" name="up" />
+      
         <div class="form-group">
               <button type="submit" class="btn btn-primary">确定</button>
         </div> 
@@ -46,42 +48,37 @@
         </div> 
         
       <!--   <div class="form-group" style="color:red;">${message}</div> -->
-         
-         
-        </form>
+         </form>
      </div> 
      
 <!-- particles.js container -->
 <div id="particles-js"></div>
 
 <!-- scripts -->
-<script src="js/particles.js"></script>
-<script src="js/app.js"></script>
-    <script type=text/javascript>
-  function checkForm() {
-	  var p1 = document.getElementsById("input-password").value;
-	  var p2 = document.getElementsById("input-password2").value;
+ <script>
+function checkForm() {
+	  var p1 = document.getElementById("input-password").value;
+	  var p2 = document.getElementById("input-password2").value;
 	   if(p1===p2){
 		   alert("bingo"+p1+" "+p2);
+		   //md5
+		  	var md5_pwd = document.getElementsByName('up')[0];
+		  	// 把用户输入的明文变为MD5:
+		  	md5_pwd.value = $.md5(p1);
+		  	
+		  	console.log("md5_pwd.value");
 		   return true;
 	   }else{
 		   alert("两次密码不相同");
 		   return false;
 	   }
-	}
+	   return true;
+}
 
-
-  //md5
-  function checkForm() {
-  	var input_pwd = document.getElementById('input-password');
-  	var md5_pwd = document.getElementById('md5-password');
-  	// 把用户输入的明文变为MD5:
-  	md5_pwd.value = $.md5(input_pwd.value);
-  	
-  	console.log("md5_pwd.value")
-  	return true;
-  }
 </script>
+<script src="js/particles.js"></script>
+<script src="js/app.js"></script>
+   
 <script>
   var count_particles, stats, update;
   stats = new Stats;

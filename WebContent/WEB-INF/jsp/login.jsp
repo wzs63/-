@@ -43,8 +43,9 @@
            <label>密码</label>
            <!-- 第一个没有name属性不会被提交 -->
            <input type="password" placeholder="密码" class="form-control"  id="input-password" style="width:300px"/>
-           <input type="hidden" name="up" id="md5-password" >
+          
          </div> 
+          <input type="hidden" name="up" >
        <!--  
         <div class="form-group">
            <label>验证码：</label>
@@ -72,25 +73,26 @@
 
 <!-- scripts -->
 <script>
-
-if(${islogincg}===0){
-	alert("登录失败");
-	}
-	
-
 //md5
 function checkForm() {
+	alert("okok");
 	var input_pwd = document.getElementById('input-password');
 	//var salt = document.getElementById('salt');
-	var md5_pwd = document.getElementById('md5-password');
+	var md5_pwd = document.getElementsByName('up')[0];
 	//salt.value = "cqjtu"+(new Date()).valueOf().toString();
 	// 把用户输入的明文+salt进行MD5加密
 	console.log(md5_pwd.value);
 	md5_pwd.value = $.md5(input_pwd.value);
 	
 	console.log(md5_pwd.value);
+	
 	return true;
 }
+
+if(${islogincg}+''===0+''){//如果直接写if(${islogincg}===0)登录失败的话，${islogincg}刚开始是没有的所有是 ===0，左边什么都没有会报错
+	alert("登录失败");
+	}
+
 </script>
 <script src="js/particles.js"></script>
 <script src="js/app.js"></script>

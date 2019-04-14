@@ -36,9 +36,12 @@
 	<!--设置连接池-->
 	<bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource" init-method="init" destroy-method="close">
         <!-- 基本属性 url、user、password -->
-        <property name="url" value="jdbc:mysql://12.0.0.1:3306/sjkdzy?characterEncoding=UTF-8" />
+         <!--  <property name="url" value="jdbc:mysql://127.0.0.1:3306/sjkdzy?characterEncoding=UTF-8" />
+    	  -->   <property name="url" value="jdbc:mysql://47.100.174.39:3306/sjkdzy?characterEncoding=UTF-8" />
+
         <property name="username" value="root" />
-        <property name="password" value="123456" />
+     <!--    <property name="password" value="123456" />
+      -->   <property name="password" value="admin" /> 
         <property name="driverClassName" value="com.mysql.jdbc.Driver" />
  
         <!-- 配置初始化大小、最小、最大 -->

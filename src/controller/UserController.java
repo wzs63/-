@@ -48,8 +48,8 @@ public class UserController {
 	public ModelAndView loginwc(User user,HttpServletRequest req,HttpServletResponse resp) throws NoSuchAlgorithmException {
 		ModelAndView mav = new ModelAndView();
 		System.out.println(user.getUid());
-		System.out.println();
-		System.out.println(user.getSalt());
+		System.out.println(user.getUp());
+		//System.out.println(user.getSalt());
 		String salt = userService.getSaltByUid(user.getUid());
 		MessageDigest md = MessageDigest.getInstance("MD5");
         // 计算md5函数
@@ -124,7 +124,8 @@ public class UserController {
 		if(!file.isEmpty()) {
         String name = System.currentTimeMillis()+"";
         String newFileName = name + ".jpg";
-        File newFile = new File("F:\\apache-tomcat-9.0.14\\image", newFileName);
+        //File newFile = new File("F:\\apache-tomcat-9.0.14\\image", newFileName);
+        File newFile = new File("/usr/local/tomcat8.5/image", newFileName);
         //File newFile = new File("F:\\eclipse-workspace\\sjkdzy\\WebContent\\image", newFileName);
         newFile.getParentFile().mkdirs();
         file.transferTo(newFile);
