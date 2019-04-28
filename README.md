@@ -64,7 +64,7 @@
 
 ![EQbyaq.md.png](https://s2.ax1x.com/2019/04/28/EQbyaq.md.png)
 
-### 购物车购买
+### 购物车购买(透明是因为鼠标没在信息栏的框内而是在框外背景上，鼠标在信息框内信息会更清楚的浏览)
 
 ![EQHZ9S.md.png](https://s2.ax1x.com/2019/04/28/EQHZ9S.md.png)
 
@@ -78,4 +78,4 @@
 
 ![EQOC28.png](https://s2.ax1x.com/2019/04/28/EQOC28.png)
 
-![EQOnP0.md.png](https://s2.ax1x.com/2019/04/28/EQOnP0.md.png)
+[![EQOdxO.md.png](https://s2.ax1x.com/2019/04/28/EQOdxO.md.png)](https://imgchr.com/i/EQOdxO)
