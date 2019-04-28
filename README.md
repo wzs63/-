@@ -1,10 +1,12 @@
 # Small-commodity-trading
 校园小商品-数据库大作业
+
 利用SSM写的小商品交易平台
 
 网站地址:http://47.100.174.39:8080/sjkdzy/login.do
 可直接用账号：用户名: w   密码: 1 (也可以自己注册)
 
+相关技术: Spring SpringMVC Mybati MySQL Ajax JavaScript Java  
 商品发布者的功能需求：
 在系统上实现注册，能够修改自身信息
 能够上传商品，进行售卖
@@ -44,6 +46,8 @@
 ### 首页
 
 ![EQ7b01.md.png](https://s2.ax1x.com/2019/04/28/EQ7b01.md.png)
+
+![EQLNjg.md.png](https://s2.ax1x.com/2019/04/28/EQLNjg.md.png)
 
 ##### 点击【more】更换首页图片
 
