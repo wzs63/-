@@ -11,6 +11,7 @@ public class User {
 	int cors;
 	String tximg;
 	String salt;
+	String email;
 	public String getSalt() {
 		return salt;
 	}
@@ -61,6 +62,12 @@ public class User {
 	}
 	public String getUpn() {
 		return upn;
+	}
+	public String getEmail() {
+		return email;
+	}
+	public void setEmail(String email) {
+		this.email = email;
 	}
 	public void setUpn(String upn) {
 		this.upn = upn;

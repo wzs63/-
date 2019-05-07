@@ -20,9 +20,9 @@ public class UserServiceImpl implements UserService{
 	UserMapper userMapper;
 	@Override
 	public void add(User user) {
-		Random random = new SecureRandom();
-		System.out.println();
-		String salt=new BigInteger(130, random).toString(32);
+//		Random random = new SecureRandom();
+//		System.out.println();
+//		String salt=new BigInteger(130, random).toString(32);
 		userMapper.add(user);
 	}
 

@@ -238,7 +238,6 @@
 		var userxxs=document.getElementsByClassName("uid");
 		for(var i=0;i<=userxxs.length-1;i++){
 			var userxx=userxxs[i];
-			
 			 $.ajax({
 		        	async:false,
 		            url: "userxx.do",

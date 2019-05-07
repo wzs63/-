@@ -12,7 +12,7 @@
   <script type="text/javascript" src="bootstrap-3.3.5-dist/js/jquery-1.9.1.min.js"></script>
   <script type="text/javascript" src="bootstrap-3.3.5-dist/js/bootstrap.min.js"></script>
   <script src="http://static.runoob.com/assets/jquery-validation-1.14.0/lib/jquery.js"></script>
- <script src="http://www.gongjuji.net/Content/files/jquery.md5.js"></script>
+  <script src="js/jquery.md5.js"></script>
 <script src="http://static.runoob.com/assets/jquery-validation-1.14.0/dist/jquery.validate.min.js"></script>
   <style type="text/css">
      .box1{ position:absolute; width:200px; height:200px; left:300px; top:200px} 
@@ -89,7 +89,7 @@ function checkForm() {
 	return true;
 }
 
-if(${islogincg}+''===0+''){//如果直接写if(${islogincg}===0)登录失败的话，${islogincg}刚开始是没有的所有是 ===0，左边什么都没有会报错
+if(${islogincg} +''===0+''){//如果直接写if(${islogincg}===0)登录失败的话，${islogincg}刚开始是没有的所有是 ===0，左边什么都没有会报错
 	alert("登录失败");
 	}
 

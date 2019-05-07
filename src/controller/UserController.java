@@ -9,6 +9,7 @@ import java.security.SecureRandom;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
+import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -29,6 +30,7 @@ import com.alibaba.fastjson.serializer.FilterUtils;
 import pojo.Ad;
 import pojo.User;
 import service.UserService;
+import service.impl.MailServiceImpl;
 
 @Controller
 public class UserController {
@@ -52,7 +54,7 @@ public class UserController {
 		//System.out.println(user.getSalt());
 		String salt = userService.getSaltByUid(user.getUid());
 		MessageDigest md = MessageDigest.getInstance("MD5");
-        // 计算md5函数
+        	// 计算md5函数
         md.update((user.getUp()+salt).getBytes());
         user.setUp(new BigInteger(1, md.digest()).toString(16));
         
@@ -93,6 +95,7 @@ public class UserController {
 		ModelAndView mav = new ModelAndView();
 		System.out.println(user.getUid());
 		System.out.println(user.getUp());
+		System.out.println(user.getEmail());
 		//随机生成盐
 		Random random = new SecureRandom();
 		String salt = new BigInteger(130, random).toString(32);
@@ -110,6 +113,20 @@ public class UserController {
 		return mav;
 		
 	}
+	@RequestMapping("checkEmail.do")
+	@ResponseBody//此注解不能省略 否则ajax无法接受返回值
+	public Map<String,Object> checkEmail(@RequestParam(value="emailAddress")String emailAddress) {
+		System.out.println(emailAddress);
+	
+		Map<String,Object> resultMap = new HashMap<String, Object>();
+		//生成激活码
+	    String code = UUID.randomUUID().toString().replaceAll("-", "");
+		new MailServiceImpl(emailAddress, code).run();
+  		resultMap.put("code", code);
+		return resultMap;
+	}
+	
+	
 	@RequestMapping("welcome.do")
 	public ModelAndView welcome() {
 		ModelAndView mav = new ModelAndView();
@@ -124,8 +141,8 @@ public class UserController {
 		if(!file.isEmpty()) {
         String name = System.currentTimeMillis()+"";
         String newFileName = name + ".jpg";
-        //File newFile = new File("F:\\apache-tomcat-9.0.14\\image", newFileName);
-        File newFile = new File("/usr/local/tomcat8.5/image", newFileName);
+        File newFile = new File("F:\\apache-tomcat-9.0.14\\image", newFileName);
+//        File newFile = new File("/usr/local/tomcat8.5/image", newFileName);
         //File newFile = new File("F:\\eclipse-workspace\\sjkdzy\\WebContent\\image", newFileName);
         newFile.getParentFile().mkdirs();
         file.transferTo(newFile);
