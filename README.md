@@ -3,9 +3,6 @@
 
 数据库课程设计时写的，利用SSM写的小商品交易平台
 
-网站地址:http://47.100.174.39:8080/sjkdzy/login.do
-可直接用账号：用户名: w   密码: 1 (也可以自己注册)
-
 相关技术: Spring SpringMVC Mybati MySQL Ajax JavaScript Java 
 
 商品发布者的功能需求：
